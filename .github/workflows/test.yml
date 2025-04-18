@@ -5,19 +5,17 @@ on:
       - main
       
 jobs:
-  all: # make sure build/ci work properly
+  build: # make sure build/ci work properly
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
       - name: Build and Update
-      - run: |
-          npm install
-      - run: |
-          npm run all
+      - run: npm install
+      - run: npm run all
           
       - name: Publish artifacts
         if: github.event_name == 'push' && github.ref == 'refs/heads/master'
-        run: |
+      - run: |
           mv gitignore-build .gitignore
           git config user.email "$GITHUB_ACTOR@users.noreply.github.com"
           git config user.name "$GITHUB_ACTOR"
