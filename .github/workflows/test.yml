@@ -9,13 +9,12 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-      - name: Build and Update
       - run: npm install
       - run: npm run all
           
       - name: Publish artifacts
         if: github.event_name == 'push' && github.ref == 'refs/heads/master'
-      - run: |
+        run: |
           mv gitignore-build .gitignore
           git config user.email "$GITHUB_ACTOR@users.noreply.github.com"
           git config user.name "$GITHUB_ACTOR"
@@ -23,12 +22,12 @@ jobs:
           git commit -m "Add build artifacts" > /dev/null
           git push origin HEAD:v0.0.1 -f
           
-      - uses: ./
       - name: Upload and Distribute
+        uses: some-action/upload-s3@v1 # Replace with the correct action for S3 upload
         with:
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_KEY_ID }}
-          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY}}
-          s3_bucket: ${{ env.BUCKET }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          s3_bucket: ${{ secrets.BUCKET }} # Ensure BUCKET is defined as a secret
           domain: dev-4.taradito.com
           publish_dir: "fe/apps/web/dist"
-          destination_dir: ${{ env.DESTINATION_DIRECTORY }}
+          destination_dir: ${{ secrets.DESTINATION_DIRECTORY }} # Ensure DESTINATION_DIRECTORY is defined as a secret
