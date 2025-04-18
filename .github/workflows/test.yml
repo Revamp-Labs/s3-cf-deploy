@@ -16,7 +16,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v3
       
-      - name: Hello World
+      - name: Hello World Test
         uses: ./
         with:
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_KEY_ID }}
