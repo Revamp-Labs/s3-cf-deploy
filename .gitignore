@@ -1,6 +1,5 @@
 node_modules
 lib
-dist
 
 # CDK
 cdk.context.json

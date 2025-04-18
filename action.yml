@@ -25,4 +25,4 @@ inputs:
     description: 'S3 bucket'    
 runs:
   using: 'node16'
-  main: 'src/main.ts'
+  main: 'dist/index.js'
