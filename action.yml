@@ -1,0 +1,28 @@
+name: 'Deploy static site to AWS using S3, Route53 and CF'
+description: ''
+author: 'revamp-labs'
+inputs:
+  AWS_ACCESS_KEY_ID:
+    required: true
+    description: 'The key id of your AWS Credentials'
+  AWS_SECRET_ACCESS_KEY:
+    required: true
+    description: 'The secret key of your AWS Credentials'
+  AWS_REGION:
+    required: false
+    description: 'The aws region. Default is us-east-1'
+  domain:
+    required: true
+    description: 'Full qualified domain (eg: subdomain.example.com) where the site will be deployed'
+  publish_dir:
+    required: true
+    description: 'Local directory to be published as a static site'
+  destination_dir:
+    required: false
+    description: 'S3 directory to upload to'    
+  s3_bucket:
+    required: false
+    description: 'S3 bucket'    
+runs:
+  using: 'node16'
+  main: 'dist/index.js'
