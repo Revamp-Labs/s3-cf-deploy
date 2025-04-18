@@ -23,7 +23,7 @@ jobs:
           git push origin HEAD:v0.0.1 -f
           
       - name: Upload and Distribute
-        uses: some-action/upload-s3@v1 # Replace with the correct action for S3 upload
+        uses: ./ # Replace with the correct action for S3 upload
         with:
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_KEY_ID }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
