@@ -25,12 +25,12 @@ export class StaticPageStack extends cdk.Stack {
       stackName,
       folder,
       fullDomain,
-      originPath
+      originPath,
     }: {
       stackName: string;
       folder: string;
       fullDomain: string;
-      originPath: string
+      originPath: string;
     },
   ) {
     super(scope, id, { stackName, env });
@@ -62,7 +62,7 @@ export class StaticPageStack extends cdk.Stack {
             customOriginSource: {
               domainName: websiteBucket.bucketWebsiteDomainName,
               originProtocolPolicy: cloudfront.OriginProtocolPolicy.HTTP_ONLY,
-              originPath: originPath
+              originPath: originPath,
             },
             behaviors: [{ isDefaultBehavior: true }],
           },
