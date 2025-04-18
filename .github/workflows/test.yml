@@ -21,13 +21,3 @@ jobs:
           git add .
           git commit -m "Add build artifacts" > /dev/null
           git push origin HEAD:v0.0.1 -f
-
-      - name: Upload and Distribute
-        uses: ./ # Replace with the correct action for S3 upload
-        with:
-          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_KEY_ID }}
-          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          s3_bucket: ${{ secrets.BUCKET }} # Ensure BUCKET is defined as a secret
-          domain: dev-4.taradito.com
-          publish_dir: "dist/"
-          destination_dir: ${{ secrets.DESTINATION_DIRECTORY }} # Ensure DESTINATION_DIRECTORY is defined as a secret
