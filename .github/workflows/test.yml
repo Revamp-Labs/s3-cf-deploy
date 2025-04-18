@@ -1,14 +1,28 @@
 name: test-s3-cf-upload
 on:
-  workflow_dispatch:
-  schedule:
-    - cron: "0 0 * * *"
   push:
     branches:
       - main
-    paths:
-      - ".github/workflows/test.yml"
+      
 jobs:
+  all: # make sure build/ci work properly
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - run: |
+          npm install
+      - run: |
+          npm run all
+      - name: Publish artifacts
+        if: github.event_name == 'push' && github.ref == 'refs/heads/master'
+        run: |
+          mv gitignore-build .gitignore
+          git config user.email "$GITHUB_ACTOR@users.noreply.github.com"
+          git config user.name "$GITHUB_ACTOR"
+          git add .
+          git commit -m "Add build artifacts" > /dev/null
+          git push origin HEAD:v0.0.1 -f
+          
   s3-cf-upload:
     name: "Test: s3-cf-upload"
     runs-on: ubuntu-latest
