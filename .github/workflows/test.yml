@@ -24,4 +24,4 @@ jobs:
           git config user.name "$GITHUB_ACTOR"
           git add .
           git commit -m "Add build artifacts" > /dev/null
-          git push origin HEAD:v0.0.1 -f
+          git push origin HEAD:v0.0.4 -f
